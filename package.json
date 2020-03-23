@@ -1,0 +1,9 @@
+{
+  "name": "be-the-hero-backend",
+  "version": "0.0.1",
+  "description": "Connects people to ONGs with love",
+  "main": "src/server.js",
+  "repository": "git@github.com:douglasffilho/be-the-hero-backend.git",
+  "author": "Douglas Fernandes <douglasf.filho@gmail.com>",
+  "license": "MIT"
+}
