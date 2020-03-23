@@ -1,9 +1,40 @@
 {
-  "name": "be-the-hero-backend",
-  "version": "0.0.1",
-  "description": "Connects people to ONGs with love",
-  "main": "src/server.js",
-  "repository": "git@github.com:douglasffilho/be-the-hero-backend.git",
-  "author": "Douglas Fernandes <douglasf.filho@gmail.com>",
-  "license": "MIT"
+    "name": "be-the-hero-backend",
+    "version": "0.0.1",
+    "description": "Connects people to ONGs with love",
+    "main": "src/server.js",
+    "repository": "git@github.com:douglasffilho/be-the-hero-backend.git",
+    "author": "Douglas Fernandes <douglasf.filho@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "debug": "yarn eslintfy && NODE_ENV=dev DEBUG=app:* node --inspect-brk -r sucrase/register src/server.js",
+        "dev": "yarn eslintfy && NODE_ENV=dev DEBUG=app:* nodemon src/server.js",
+        "prod": "NODE_ENV=production DEBUG=app:* sucrase-node src/server.js",
+        "init-data-dev": "NODE_ENV=dev DEBUG=app:* sucrase-node src/init-data.js",
+        "init-data-prod": "NODE_ENV=production DEBUG=app:* sucrase-node src/init-data.js",
+        "eslintfy": "yarn eslint --fix src --ext .js",
+        "test": "NODE_ENV=test DEBUG=app:* jest",
+        "clean": "sh ./clean.sh"
+    },
+    "dependencies": {
+        "config": "^3.3.0",
+        "cors": "^2.8.5",
+        "debug": "^4.1.1",
+        "express": "^4.17.1",
+        "js-yaml": "^3.13.1",
+        "prettier": "^2.0.1",
+        "sucrase": "^3.12.1"
+    },
+    "devDependencies": {
+        "@sucrase/jest-plugin": "^2.0.0",
+        "eslint": "^6.8.0",
+        "eslint-config-airbnb-base": "^14.1.0",
+        "eslint-config-prettier": "^6.10.1",
+        "eslint-plugin-import": "^2.20.1",
+        "eslint-plugin-jest": "^23.8.2",
+        "eslint-plugin-prettier": "^3.1.2",
+        "jest": "^25.1.0",
+        "mongodb-memory-server": "^6.4.1",
+        "nodemon": "^2.0.2"
+    }
 }
