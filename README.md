@@ -2,7 +2,7 @@
 Connects people to ONGs with love 🚀
 
 ## Idea
-Following the Semana Oministack 11.0 application development, we're building a app to connect people with ONGs what can be a good tool after some improvements.
+Following the Semana Oministack 11.0 application development, we're building an app to connect people with ONGs what can be a good tool after some improvements.
 
 ## Main Purpose (Technical)
 - Maintain the Business Rules
