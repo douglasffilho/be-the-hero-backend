@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  be-the-hero-mongodb:
+    container_name: be-the-hero-mongodb
+    hostname: be-the-hero-mongodb
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: database
+      MONGO_INITDB_ROOT_DATABASE: database
+      MONGO_INITDB_ROOT_PASSWORD: password
+    restart: always
+    ports:
+      - 27018:27017
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+

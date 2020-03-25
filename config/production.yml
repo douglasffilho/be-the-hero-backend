@@ -1,3 +1,5 @@
 server:
   port: 8080
 
+mongodb:
+  connection: <type-prod-config-here>
