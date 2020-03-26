@@ -3,7 +3,8 @@ import OngService from "../services/OngService";
 
 const IncidentController = {
     async create(request, response) {
-        const { title, description, value, ongEmail } = request.body;
+        const { ongEmail } = request.headers.authorization;
+        const { title, description, value } = request.body;
         const incident = { title, description, value: Number(value), ongEmail };
 
         const ong = await OngService.findByEmail(ongEmail);
