@@ -1,9 +1,15 @@
 import express from "express";
+import OngController from "./controllers/OngController";
+import IncidentController from "./controllers/IncidentController";
 
 const router = express.Router();
 
-router.get("/hello", (req, res) => {
-    return res.json({ message: "Hello World!" });
-});
+router.post("/ongs", OngController.create);
+router.get("/ongs", OngController.findAll);
+
+router.post("/incidents", IncidentController.create);
+router.get("/incidents", IncidentController.findAll);
+router.get("/incidents/:email", IncidentController.findAllByOngEmail);
+router.delete("/incidents/:id", IncidentController.deleteById);
 
 export default router;

@@ -18,6 +18,7 @@ const connect = async (retry = 3) => {
             await mongoose.connect(dbUri, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
+                useCreateIndex: true,
             });
 
             log.info("connected");
