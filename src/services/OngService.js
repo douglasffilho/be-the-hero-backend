@@ -5,6 +5,12 @@ const log = Log("OngService");
 
 const OngService = {
     async login(auth) {
+        const ong = await OngRepository.findOne({ email: auth });
+
+        if (!ong) {
+            return { error: "ong-service-not-authorized", status: 401 };
+        }
+
         return auth;
     },
 

@@ -29,6 +29,10 @@ const OngController = {
         const auth = request.headers.authorization;
         const token = await OngService.login(auth);
 
+        if (token.error) {
+            return response.status(token.status).json(token);
+        }
+
         return response.status(200).json({ token });
     },
 };
