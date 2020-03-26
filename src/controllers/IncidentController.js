@@ -53,16 +53,15 @@ const IncidentController = {
     },
 
     async deleteById(request, response) {
+        const ongEmail = request.headers.authorization;
         const { id } = request.params;
 
-        const deletion = await IncidentService.delete(id);
+        const deletion = await IncidentService.delete(id, ongEmail);
         if (deletion.deletedCount === 1) {
             return response.status(202).json({ deleted: id });
         }
 
-        return response
-            .status(400)
-            .json({ error: "incident-controller-already-deleted", id });
+        return response.status(deletion.status).json(deletion);
     },
 };
 

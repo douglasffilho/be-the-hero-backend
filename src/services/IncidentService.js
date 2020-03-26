@@ -1,5 +1,6 @@
 import IncidentRepository from "../repositories/IncidentRepository";
 import Log from "../utils/Log";
+import OngService from "./OngService";
 
 const log = Log("OngService");
 
@@ -16,15 +17,50 @@ const IncidentService = {
         }
     },
 
-    async delete(_id) {
+    async delete(_id, ongEmail) {
         try {
+            if (!ongEmail) {
+                return {
+                    error: "incident-service-authorization-required",
+                    id: _id,
+                    status: 401,
+                };
+            }
+
+            const ong = await OngService.findByEmail(ongEmail);
+            if (!ong.email) {
+                return {
+                    error: "incident-service-ong-not-found",
+                    id: _id,
+                    status: 404,
+                };
+            }
+
+            const incident = await IncidentRepository.findById(_id);
+            if (!incident) {
+                return {
+                    error: "incident-service-incident-not-found",
+                    id: _id,
+                    status: 404,
+                };
+            }
+
+            if (ong.email !== incident.ongEmail) {
+                return {
+                    error: "incident-service-operation-not-permited",
+                    id: _id,
+                    status: 403,
+                };
+            }
+
             return await IncidentRepository.deleteOne({ _id });
         } catch (error) {
             log.error(
                 "error trying to delete incident. error=%s",
                 error.message
             );
-            return error;
+
+            return { error: "incident-service-already-deleted", id: _id };
         }
     },
 
