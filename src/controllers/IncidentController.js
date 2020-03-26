@@ -12,6 +12,12 @@ const IncidentController = {
             ongEmail: auth,
         };
 
+        if (Number.isNaN(incident.value)) {
+            return response
+                .status(400)
+                .json({ error: "incident-controller-invalid-value" });
+        }
+
         const ong = await OngService.findByEmail(auth);
 
         if (!ong || !ong.email) {
