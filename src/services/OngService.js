@@ -4,8 +4,8 @@ import Log from "../utils/Log";
 const log = Log("OngService");
 
 const OngService = {
-    async login() {
-        return null;
+    async login(auth) {
+        return auth;
     },
 
     async create(ong) {

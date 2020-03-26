@@ -3,11 +3,16 @@ import OngService from "../services/OngService";
 
 const IncidentController = {
     async create(request, response) {
-        const ongEmail = request.headers.authorization;
+        const auth = request.headers.authorization;
         const { title, description, value } = request.body;
-        const incident = { title, description, value: Number(value), ongEmail };
+        const incident = {
+            title,
+            description,
+            value: Number(value),
+            ongEmail: auth,
+        };
 
-        const ong = await OngService.findByEmail(ongEmail);
+        const ong = await OngService.findByEmail(auth);
 
         if (!ong || !ong.email) {
             return response
@@ -53,10 +58,10 @@ const IncidentController = {
     },
 
     async deleteById(request, response) {
-        const ongEmail = request.headers.authorization;
+        const auth = request.headers.authorization;
         const { id } = request.params;
 
-        const deletion = await IncidentService.delete(id, ongEmail);
+        const deletion = await IncidentService.delete(id, auth);
         if (deletion.deletedCount === 1) {
             return response.status(202).json({ deleted: id });
         }

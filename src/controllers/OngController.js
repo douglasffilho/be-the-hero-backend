@@ -24,6 +24,13 @@ const OngController = {
 
         return response.status(400).json({ error: found });
     },
+
+    async login(request, response) {
+        const auth = request.headers.authorization;
+        const token = await OngService.login(auth);
+
+        return response.status(200).json({ token });
+    },
 };
 
 export default OngController;
