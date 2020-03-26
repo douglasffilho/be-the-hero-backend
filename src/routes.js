@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post("/ongs", OngController.create);
 router.get("/ongs", OngController.findAll);
+router.post("/ongs/login", OngController.login);
 
 router.post("/incidents", IncidentController.create);
 router.get("/incidents", IncidentController.findAll);
