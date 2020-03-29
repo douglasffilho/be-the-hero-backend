@@ -42,7 +42,12 @@ const OngService = {
 
     async findByEmail(email) {
         try {
-            return await OngRepository.findOne({ email });
+            const ong = await OngRepository.findOne({ email }, { _id: 0 });
+            if (!ong) {
+                return { error: "ong-service-ong-not-found" };
+            }
+
+            return ong;
         } catch (error) {
             log.error(
                 "error trying to get Ong by e-mail. email=%s, error=%s",
@@ -50,7 +55,7 @@ const OngService = {
                 error.message
             );
 
-            return error.message;
+            return { error: "ong-service-ong-not-found" };
         }
     },
 };

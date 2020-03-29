@@ -25,6 +25,17 @@ const OngController = {
         return response.status(400).json({ error: found });
     },
 
+    async findByEmail(request, response) {
+        const { email } = request.params;
+
+        const found = await OngService.findByEmail(email);
+        if (found.error) {
+            return response.status(404).json({ error: found.error });
+        }
+
+        return response.status(200).json(found);
+    },
+
     async login(request, response) {
         const auth = request.headers.authorization;
         const token = await OngService.login(auth);
