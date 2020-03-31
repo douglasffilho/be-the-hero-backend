@@ -7,6 +7,10 @@ const log = Log("OngService");
 const IncidentService = {
     async create(incident) {
         try {
+            if (Number.isNaN(incident.value) || incident.value === 0) {
+                incident.value = null;
+            }
+
             return await IncidentRepository.create(incident);
         } catch (error) {
             log.error(
