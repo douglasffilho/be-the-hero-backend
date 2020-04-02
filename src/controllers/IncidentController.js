@@ -32,9 +32,14 @@ const IncidentController = {
         const { page, size } = request.query;
 
         const found = await IncidentService.findAll(Number(page), Number(size));
-        if (Array.isArray(found)) {
-            const status = found.length > 0 ? 200 : 204;
-            return response.status(status).json(found);
+        if (Array.isArray(found.incidents)) {
+            const status = found.incidents.length > 0 ? 200 : 204;
+
+            if (status === 200) {
+                response.header("x-total", found.total);
+            }
+
+            return response.status(status).json(found.incidents);
         }
 
         return response.status(400).json({ error: found });

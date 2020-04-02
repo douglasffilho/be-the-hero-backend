@@ -70,9 +70,14 @@ const IncidentService = {
 
     async findAll(page, size) {
         try {
-            return await IncidentRepository.find({})
+            const response = { incidents: [], total: 0 };
+            response.incidents = await IncidentRepository.find({})
                 .skip(size * (page - 1))
                 .limit(size);
+
+            response.total = await IncidentRepository.countDocuments({});
+
+            return response;
         } catch (error) {
             log.error(
                 "error trying to list incidents. page=%s, size=%s, error=%s",
